@@ -1,14 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Logo from './components/Logo';
+import { StyleSheet, View } from 'react-native';
+import Index from './components/Index';
 
 export default function App() {
   return (
     <View style={ styles.container }>
-      <Logo/>
-      <Text>Beegu é um app de transporte compartilhado</Text>
-      <Text style={ styles.texto }>Faz o BEEBEEP!</Text>
-      <StatusBar style="auto" />
+      <Index />
     </View>
   );
 }
@@ -16,12 +12,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF400',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-
-  texto: {
-    paddingBottom: 20,
   },
 });
