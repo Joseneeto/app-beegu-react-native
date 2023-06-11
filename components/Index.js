@@ -11,7 +11,7 @@ const Index = () => {
     const [nome, setaNome] = React.useState('');
     const [telefone, setaTelefone] = React.useState('');
 
-    //const endpoint = 'https://www.linkdaapi.com/endpoint';
+    const endpoint = 'https://github-sq75eata2q-uc.a.run.app/api/v1/cadastro';
 
     const cadastraUser = () => {
         let usuario = {
@@ -24,17 +24,19 @@ const Index = () => {
         let numeroValido = usuario.telefone.match(exp) > 0;
 
         if (nomeValido && numeroValido) {
-            // fetch(endpoint, {
-            //     method: "POST",
-            //     body: JSON.stringify(usuario),
-            //     headers: {"Content-type": "application/json; charset=UTF-8"}
-            // })
-            // .then(response => response.json()) 
-            // .then(json => console.log(json))
-            // .catch(err => console.log(err))
+            fetch(endpoint, {
+                method: "POST",
+                body: JSON.stringify(usuario),
+                headers: {"Content-type": "application/json; charset=UTF-8"}
+            })
+            .then(response => response.json()) 
+            .then(json => console.log(json))
+            .catch(err => console.log(err))
 
+            console.log(usuario)
             Alert.alert(`Bem-vindo(a) ao Beegu, ${usuario.nome}!`);
         } else {
+            console.log(`Favor, inserir dados de registro válidos!`)
             Alert.alert(`Favor, inserir dados de registro válidos!`);
         }
     }
