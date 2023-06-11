@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-// import Index from './components/Index';
+import Index from './components/Index';
 import Home from './components/Home';
 
 export default function App() {

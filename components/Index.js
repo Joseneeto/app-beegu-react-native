@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View, TextInput, Pressable, ImageBackground, Alert } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground, Alert } from 'react-native'
 import React from 'react'
 import { useFonts } from 'expo-font';
 
 const Index = () => {
-    const [fontsLoaded] = useFonts({
+    useFonts({
         'BalooBhai2-Regular': require('../assets/fonts/BalooBhai2-Regular.ttf'),
         'BalooBhai2-Bold': require('../assets/fonts/BalooBhai2-Bold.ttf')
     });
@@ -27,16 +27,14 @@ const Index = () => {
             fetch(endpoint, {
                 method: "POST",
                 body: JSON.stringify(usuario),
-                headers: {"Content-type": "application/json; charset=UTF-8"}
+                headers: { "Content-type": "application/json; charset=UTF-8" }
             })
-            .then(response => response.json()) 
-            .then(json => console.log(json))
-            .catch(err => console.log(err))
+                .then(response => response.json())
+                .then(json => console.log(json))
+                .catch(err => console.log(err))
 
-            console.log(usuario)
             Alert.alert(`Bem-vindo(a) ao Beegu, ${usuario.nome}!`);
         } else {
-            console.log(`Favor, inserir dados de registro válidos!`)
             Alert.alert(`Favor, inserir dados de registro válidos!`);
         }
     }
@@ -49,9 +47,9 @@ const Index = () => {
                 <TextInput style={styles.caixaTexto} value={nome} onChangeText={setaNome} />
                 <Text style={styles.label}>Telefone</Text>
                 <TextInput style={styles.caixaTexto} value={telefone} onChangeText={setaTelefone} keyboardType='numeric' />
-                <Pressable style={styles.botao} onPress={cadastraUser}>
+                <TouchableHighlight style={styles.botao} underlayColor="#674461" onPress={cadastraUser}>
                     <Text style={styles.txtBotao}>Entrar</Text>
-                </Pressable>
+                </TouchableHighlight>
             </ImageBackground>
         </View>
     )
@@ -71,7 +69,7 @@ const styles = StyleSheet.create({
     },
 
     titulo: {
-        color: '#674461',
+        color: '#4C2F47',
         fontSize: 64,
         fontWeight: 'bold',
         fontFamily: 'BalooBhai2-Bold',
@@ -79,7 +77,7 @@ const styles = StyleSheet.create({
     },
 
     label: {
-        color: '#674461',
+        color: '#4C2F47',
         fontSize: 18,
         marginBottom: 5,
     },
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: '#674461',
+        borderColor: '#4C2F47',
         marginBottom: 30,
         padding: 10,
     },
@@ -97,7 +95,7 @@ const styles = StyleSheet.create({
     botao: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#674461',
+        backgroundColor: '#4C2F47',
         borderRadius: 4,
         padding: 8,
     },
