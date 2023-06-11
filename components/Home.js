@@ -1,4 +1,4 @@
-import { StyleSheet, View, SafeAreaView, ImageBackground, Text, ScrollView } from 'react-native'
+import { StyleSheet, View, SafeAreaView, ImageBackground, Text, ScrollView, Pressable } from 'react-native'
 import React from 'react'
 
 const Home = () => {
@@ -24,18 +24,18 @@ const Home = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
-                <Text style={styles.welcome}>Olá usuário!</Text>
+                <Text style={styles.welcomeTitle}>Olá usuário!</Text>
             </View>
             <ImageBackground source={require('../assets/images/logo.png')} style={styles.ridesList} imageStyle={styles.image}>
-                <Text style={styles.openRidesTitle}>Caronas abertas</Text>
-                <ScrollView>
+                <ScrollView style={styles.scroll}>
+                    <Text style={styles.openRidesTitle}>Caronas abertas</Text>
                     {lista.map(carona => (
-                        <View key={carona.id}>
-                            <Text style={styles.ride}>Horário: {carona.horario}</Text>
-                            <Text style={styles.ride}>Número de vagas: {carona.vagas}</Text>
-                            <Text style={styles.ride}>Ponto de partida: {carona.enderecoInicial}</Text>
-                            <Text style={styles.ride}>Destino: {carona.enderecoFinal}</Text>
-                        </View>
+                        <Pressable style={styles.ride} key={carona.id}>
+                            <Text style={styles.rideInfo}>Horário: {carona.horario}</Text>
+                            <Text style={styles.rideInfo}>Número de vagas: {carona.vagas}</Text>
+                            <Text style={styles.rideInfo}>Ponto de partida: {carona.enderecoInicial}</Text>
+                            <Text style={styles.rideInfo}>Destino: {carona.enderecoFinal}</Text>
+                        </Pressable>
                     ))}
                 </ScrollView>
             </ImageBackground>
@@ -56,26 +56,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#FEDF00',
     },
 
-    welcome: {
+    welcomeTitle: {
         fontSize: 22,
         fontWeight: 'bold',
         color: '#674461',
+        paddingTop: 25,
     },
 
     ridesList: {
-        marginTop: 30,
         alignItems: 'center',
-    },
-
-    ride: {
-        marginTop: 30,
-        fontSize: 16,
-    },
-
-    openRidesTitle: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        color: '#674461',
     },
 
     image: {
@@ -87,6 +76,29 @@ const styles = StyleSheet.create({
         height: 1000,
         top: -75,
         left: 75,
+    },
+
+    openRidesTitle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: '#674461',
+    },
+
+    scroll: {
+        width: '100%',
+        padding: 40,
+    },
+
+    ride: {
+        marginTop: 20,
+        backgroundColor: '#674461',
+        borderRadius:10,
+        padding: 15,
+    },
+
+    rideInfo: {
+        fontSize: 16,
+        color: '#FFF',
     },
 });
 
