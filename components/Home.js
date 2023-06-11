@@ -1,5 +1,6 @@
-import { StyleSheet, View, SafeAreaView, ImageBackground, Text, ScrollView, Pressable } from 'react-native'
+import { StyleSheet, View, SafeAreaView, ImageBackground, Text, ScrollView, TouchableHighlight} from 'react-native'
 import React from 'react'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const Home = () => {
     const [lista, setaLista] = React.useState([]);
@@ -7,19 +8,18 @@ const Home = () => {
     const endpoint = 'https://github-sq75eata2q-uc.a.run.app/api/v1/carona';
 
     React.useEffect(() => {
-        listarCaronaAll();   
+        listarCaronaAll();
     }, []);
 
-    const listarCaronaAll = () => {     
-      fetch(endpoint, {
-        method: "GET",
-        headers: {"Content-type": "application/json; charset=UTF-8"}
-      })
-      .then(response => response.json())
-      .then(json => setaLista(json))
-      .catch(err => console.log(err))
+    const listarCaronaAll = () => {
+        fetch(endpoint, {
+            method: "GET",
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+        })
+            .then(response => response.json())
+            .then(json => setaLista(json))
+            .catch(err => console.log(err))
     }
-        
 
     return (
         <SafeAreaView style={styles.container}>
@@ -27,19 +27,24 @@ const Home = () => {
                 <Text style={styles.welcomeTitle}>Olá usuário!</Text>
             </View>
             <ImageBackground source={require('../assets/images/logo.png')} style={styles.ridesList} imageStyle={styles.image}>
-                <ScrollView style={styles.scroll}>
+                <ScrollView style={styles.scroll} contentContainerStyle={{paddingBottom: 150}}>
                     <Text style={styles.openRidesTitle}>Caronas abertas</Text>
                     {lista.map(carona => (
-                        <Pressable style={styles.ride} key={carona.id}>
-                            <Text style={styles.rideInfo}>Horário: {carona.horario}</Text>
-                            <Text style={styles.rideInfo}>Número de vagas: {carona.vagas}</Text>
-                            <Text style={styles.rideInfo}>Ponto de partida: {carona.enderecoInicial}</Text>
-                            <Text style={styles.rideInfo}>Destino: {carona.enderecoFinal}</Text>
-                        </Pressable>
+                        <TouchableHighlight style={styles.ride} underlayColor="#674461" onPress={() => {}} key={carona.id}>
+                            <View>
+                                <Text style={styles.rideInfo}>Horário: {carona.horario}</Text>
+                                <Text style={styles.rideInfo}>Número de vagas: {carona.vagas}</Text>
+                                <Text style={styles.rideInfo}>Ponto de partida: {carona.enderecoInicial}</Text>
+                                <Text style={styles.rideInfo}>Destino: {carona.enderecoFinal}</Text>
+                            </View>
+                        </TouchableHighlight>
                     ))}
                 </ScrollView>
             </ImageBackground>
-        </SafeAreaView>    
+            <TouchableHighlight style={styles.addRideIcon} underlayColor="#FFF400" onPress={() => {}}>
+                <Icon name='car' size={30} color={'#4C2F47'} />
+            </TouchableHighlight>
+        </SafeAreaView>
     )
 }
 
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
     welcomeTitle: {
         fontSize: 22,
         fontWeight: 'bold',
-        color: '#674461',
+        color: '#4C2F47',
         paddingTop: 25,
     },
 
@@ -79,20 +84,24 @@ const styles = StyleSheet.create({
     },
 
     openRidesTitle: {
+        marginBottom: 30,
         fontSize: 22,
         fontWeight: 'bold',
-        color: '#674461',
+        color: '#4C2F47',
     },
 
     scroll: {
         width: '100%',
-        padding: 40,
+        paddingTop: 30,
+        paddingRight: 40,
+        paddingBottom: 30,
+        paddingLeft: 40,
     },
 
     ride: {
-        marginTop: 20,
-        backgroundColor: '#674461',
-        borderRadius:10,
+        marginBottom: 20,
+        backgroundColor: '#4C2F47',
+        borderRadius: 10,
         padding: 15,
     },
 
@@ -100,6 +109,18 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#FFF',
     },
+    
+    addRideIcon: {
+        position:'absolute',
+        width:65,
+        height:65,
+        alignItems:'center',
+        justifyContent:'center',
+        right:'7%',
+        bottom:'5%',
+        backgroundColor:'#FEDF00',
+        borderRadius: 50,
+    }
 });
 
 export default Home
