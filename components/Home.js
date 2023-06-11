@@ -83,11 +83,17 @@ const Home = () => {
     }        
 
     return (
-      <View>
-          <ImageBackground source={require('../assets/images/logo.png')} imageStyle={styles.image}>
-          </ImageBackground>
-      </View>
-   )
+        <SafeAreaView style={styles.container}>
+            <View style={styles.topBar}>
+                <Text style={styles.welcome}>Olá usuário!</Text>
+            </View>
+            <ImageBackground source={require('../assets/images/logo.png')} style={styles.ridesList} imageStyle={styles.image}>
+                <Text style={styles.openRidesTitle}>Caronas abertas</Text>
+                <Text style={styles.ride}>objeto de uma lista aqui!</Text>
+    
+            </ImageBackground>
+        </SafeAreaView>    
+    )
 }
 
 const styles = StyleSheet.create({
