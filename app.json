@@ -4,10 +4,10 @@
     "slug": "Beegu",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/192.png",
+    "icon": "./assets/images/192.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/512.png",
+      "image": "./assets/images/512.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/192.png",
+        "foregroundImage": "./assets/images/192.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/192.png"
+      "favicon": "./assets/images/192.png"
     }
   }
 }

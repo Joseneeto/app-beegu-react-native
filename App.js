@@ -3,7 +3,7 @@ import Index from './components/Index';
 
 export default function App() {
   return (
-    <View style={ styles.container }>
+    <View style={styles.container}>
       <Index />
     </View>
   );
