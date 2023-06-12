@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground,
 import React from 'react'
 import { useFonts } from 'expo-font';
 
-const Index = () => {
+const Index = ({navigation}) => {
     useFonts({
         'BalooBhai2-Regular': require('../assets/fonts/BalooBhai2-Regular.ttf'),
         'BalooBhai2-Bold': require('../assets/fonts/BalooBhai2-Bold.ttf')
@@ -34,13 +34,18 @@ const Index = () => {
                 .catch(err => console.log(err))
 
             Alert.alert(`Bem-vindo(a) ao Beegu, ${usuario.nome}!`);
+
+            navigation.reset({
+                index:0,
+                routes: [{name: "Home"}]
+            });
         } else {
             Alert.alert(`Favor, inserir dados de registro válidos!`);
         }
     }
 
     return (
-        <View>
+        <View style={styles.containerYellow}>
             <ImageBackground source={require('../assets/images/logo.png')} imageStyle={styles.image}>
                 <Text style={styles.titulo}>Beegu</Text>
                 <Text style={styles.label}>Nome</Text>
@@ -56,6 +61,12 @@ const Index = () => {
 }
 
 const styles = StyleSheet.create({
+    containerYellow: {
+        flex: 1,
+        backgroundColor: '#FEDF00',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
     image: {
         flex: 1,
         opacity: 0.1,

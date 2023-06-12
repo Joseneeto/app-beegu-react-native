@@ -1,8 +1,7 @@
-import { StyleSheet, View, SafeAreaView, ImageBackground, Text, ScrollView, TouchableHighlight} from 'react-native'
+import { StyleSheet, View, SafeAreaView, ImageBackground, Text, ScrollView, TouchableHighlight, Image} from 'react-native'
 import React from 'react'
-import Icon from 'react-native-vector-icons/Ionicons'
 
-const Home = () => {
+const Home = ({navigation}) => {
     const [lista, setaLista] = React.useState([]);
 
     const endpoint = 'https://github-sq75eata2q-uc.a.run.app/api/v1/carona';
@@ -41,8 +40,10 @@ const Home = () => {
                     ))}
                 </ScrollView>
             </ImageBackground>
-            <TouchableHighlight style={styles.addRideIcon} underlayColor="#FFF400" onPress={() => {}}>
-                <Icon name='car' size={30} color={'#4C2F47'} />
+            <TouchableHighlight style={styles.addRide} underlayColor="#FFF400" onPress={() => {
+                navigation.navigate("CriarCarona");
+            }}>
+                <Image source={require('../assets/images/addCarona.png')} style={styles.addRideIcon} />
             </TouchableHighlight>
         </SafeAreaView>
     )
@@ -52,6 +53,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
+        backgroundColor: '#FFF',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     topBar: {
@@ -109,18 +113,24 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#FFF',
     },
-    
-    addRideIcon: {
+
+    addRide:{
+        width: 75,
+        height: 75,
         position:'absolute',
-        width:65,
-        height:65,
         alignItems:'center',
         justifyContent:'center',
         right:'7%',
         bottom:'5%',
         backgroundColor:'#FEDF00',
         borderRadius: 50,
-    }
+
+    },
+    
+    addRideIcon: {
+        width: 55,
+        height: 55,
+    },
 });
 
 export default Home
