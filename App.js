@@ -1,31 +1,27 @@
 import { StyleSheet, View } from 'react-native';
 import Index from './components/Index';
 import Home from './components/Home';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import CriarCarona from './components/CriarCarona';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+function MyStack() {
   return (
-    // <View style={styles.containerYellow}>
-    //   <Index />
-    // </View>
-
-    <View style={styles.containerWhite}>
-      <Home />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="Index" component={Index} />
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="CriarCarona" component={CriarCarona} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  containerYellow: {
-    flex: 1,
-    backgroundColor: '#FEDF00',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+export default function App() {
+  return (
 
-  containerWhite: {
-    flex: 1,
-    backgroundColor: '#FFF',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
