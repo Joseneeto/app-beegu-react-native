@@ -52,14 +52,14 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%',
         backgroundColor: '#FFF',
         alignItems: 'center',
         justifyContent: 'center'
     },
 
     topBar: {
-        height: 80,
+        width: '100%',
+        height: 180,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#FEDF00',
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
         color: '#4C2F47',
-        paddingTop: 25,
+        paddingTop: 120,
     },
 
     ridesList: {
@@ -97,9 +97,9 @@ const styles = StyleSheet.create({
     scroll: {
         width: '100%',
         paddingTop: 30,
-        paddingRight: 40,
+        paddingRight: 45,
         paddingBottom: 30,
-        paddingLeft: 40,
+        paddingLeft: 45,
     },
 
     ride: {
