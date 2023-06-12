@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, ScrollView, SafeAreaView } from 'react-native'
 import React from 'react'
 
 const CriarCarona = () => {
@@ -67,18 +67,71 @@ const CriarCarona = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <Text>CriarCarona</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.topBar}>
+          <Text style={styles.welcomeTitle}>Criar Carona</Text>
+      </View>
+      <ImageBackground source={require('../assets/images/logo.png')} style={styles.ridesList} imageStyle={styles.image}>
+          <ScrollView style={styles.scroll} contentContainerStyle={{paddingBottom: 150}}>
+              <Text style={styles.openRidesTitle}>Detalhes da carona</Text>
+          </ScrollView>
+      </ImageBackground>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
+    alignItems: 'center',
+    justifyContent: 'center'
+},
+
+topBar: {
+    width: '100%',
+    height: 180,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+    backgroundColor: '#FEDF00',
+},
+
+welcomeTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#4C2F47',
+    paddingTop: 120,
+},
+
+ridesList: {
+    alignItems: 'center',
+},
+
+image: {
+    flex: 1,
+    opacity: 0.1,
+    resizeMode: 'contain',
+    position: 'absolute',
+    width: 600,
+    height: 1000,
+    top: -75,
+    left: 75,
+},
+
+openRidesTitle: {
+    marginBottom: 30,
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#4C2F47',
+},
+
+scroll: {
+    width: '100%',
+    paddingTop: 30,
+    paddingRight: 45,
+    paddingBottom: 30,
+    paddingLeft: 45,
+},
 })
 
 export default CriarCarona;
