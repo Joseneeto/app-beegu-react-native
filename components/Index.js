@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground, Alert } from 'react-native'
 import React from 'react'
-import { useFonts } from 'expo-font';
+//import { useFonts } from 'expo-font';
 
-const Index = ({navigation}) => {
-    useFonts({
-        'BalooBhai2-Regular': require('../assets/fonts/BalooBhai2-Regular.ttf'),
-        'BalooBhai2-Bold': require('../assets/fonts/BalooBhai2-Bold.ttf')
-    });
+const Index = ({ navigation }) => {
+    // useFonts({
+    //     'BalooBhai2-Regular': require('../assets/fonts/BalooBhai2-Regular.ttf'),
+    //     'BalooBhai2-Bold': require('../assets/fonts/BalooBhai2-Bold.ttf')
+    // });
 
     const [nome, setaNome] = React.useState('');
     const [telefone, setaTelefone] = React.useState('');
@@ -36,8 +36,8 @@ const Index = ({navigation}) => {
             Alert.alert(`Bem-vindo(a) ao Beegu, ${usuario.nome}!`);
 
             navigation.reset({
-                index:0,
-                routes: [{name: "Home"}]
+                index: 0,
+                routes: [{ name: "Home" }]
             });
         } else {
             Alert.alert(`Favor, inserir dados de registro válidos!`);
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FEDF00',
         alignItems: 'center',
         justifyContent: 'center',
-      },
+    },
     image: {
         flex: 1,
         opacity: 0.1,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         color: '#4C2F47',
         fontSize: 64,
         fontWeight: 'bold',
-        fontFamily: 'BalooBhai2-Bold',
+        //fontFamily: 'BalooBhai2-Bold',
         marginBottom: 80,
     },
 
