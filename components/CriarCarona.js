@@ -3,6 +3,7 @@ import MapView, { Marker } from 'react-native-maps';
 import React from 'react'
 
 const CriarCarona = () => {
+  let horaMili = Date.now();
   let horaAtual = new Date().toLocaleTimeString();
 
   const [horario, setaHorario] = React.useState(horaAtual);
@@ -20,11 +21,10 @@ const CriarCarona = () => {
       enderecoFinal: enderecoFinal,
     }
 
-    console.log(horaAtual, typeof (horaAtual));
+    let exp = new RegExp(/^(?:[01]?[0-9]|2[0-3]):[0-5]?[0-9](?::[0-5]?[0-9])?$/);
+    let horaArray = carona.horario.match(exp);
 
-    //let exp = new RegExp('^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$');
-    //let horarioValido = carona.horario.match(exp) > 0;
-    let horarioValido = true;
+    let horarioValido = horaArray.length > 0;
 
     if (horarioValido) {
       fetch(endpoint, {
@@ -36,8 +36,9 @@ const CriarCarona = () => {
         .then(json => console.log(json))
         .catch(err => console.log(err))
 
+        Alert.alert(`Carona criada com sucesso, aguarde até o horário marcado para partir.`);
+
     } else {
-      console.log(`Favor, inserir horário válido no formato HH:MM:SS`)
       Alert.alert(`Favor, inserir horário válido no formato HH:MM:SS`);
     }
   }
@@ -84,7 +85,7 @@ const CriarCarona = () => {
           <View style={styles.opcoes}>
             <View>
               <Text style={styles.label}>Horário da partida</Text>
-              <TextInput style={styles.caixaTexto} value={horario} onChangeText={setaHorario} keyboardType='numeric' />
+              <TextInput style={styles.caixaTexto} value={horario} onChangeText={setaHorario} />
             </View>
 
             <View>
