@@ -2,8 +2,7 @@ import { StyleSheet, Text, View, ImageBackground, ScrollView, SafeAreaView, Text
 import MapView, { Marker } from 'react-native-maps';
 import React from 'react'
 
-const CriarCarona = () => {
-  let horaMili = Date.now();
+const CriarCarona = ({ navigation }) => {
   let horaAtual = new Date().toLocaleTimeString();
 
   const [horario, setaHorario] = React.useState(horaAtual);
@@ -19,6 +18,8 @@ const CriarCarona = () => {
       vagas: vagas,
       enderecoInicial: enderecoInicial,
       enderecoFinal: enderecoFinal,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     }
 
     let exp = new RegExp(/^(?:[01]?[0-9]|2[0-3]):[0-5]?[0-9](?::[0-5]?[0-9])?$/);
@@ -36,7 +37,9 @@ const CriarCarona = () => {
         .then(json => console.log(json))
         .catch(err => console.log(err))
 
-        Alert.alert(`Carona criada com sucesso, aguarde até o horário marcado para partir.`);
+        Alert.alert(`Carona criada com sucesso, aguarde até o horário marcado.`);
+
+        navigation.navigate("Home");
 
     } else {
       Alert.alert(`Favor, inserir horário válido no formato HH:MM:SS`);
@@ -211,7 +214,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFF',
   },
-
 })
 
 export default CriarCarona;

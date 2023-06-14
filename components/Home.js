@@ -1,7 +1,8 @@
-import { StyleSheet, View, SafeAreaView, ImageBackground, Text, ScrollView, TouchableHighlight, Image} from 'react-native'
+import { StyleSheet, View, SafeAreaView, ImageBackground, Text, ScrollView, TouchableHighlight, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
+import { Alert } from 'react-native';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
     const [lista, setaLista] = React.useState([]);
 
     const endpoint = 'https://github-sq75eata2q-uc.a.run.app/api/v1/carona';
@@ -9,6 +10,15 @@ const Home = ({navigation}) => {
     React.useEffect(() => {
         listarCaronaAll();
     }, []);
+    
+    // const listarUsuarioById = (id) => {
+    //     fetch(`${'https://github-sq75eata2q-uc.a.run.app/api/v1/usuário'}/${id}`, {
+    //         method: "GET",
+    //         headers: { "Content-type": "application/json; charset=UTF-8" }
+    //     })
+    //         .then(response => console.log(response))
+    //         .catch(err => console.log(err))
+    // }
 
     const listarCaronaAll = () => {
         fetch(endpoint, {
@@ -20,18 +30,57 @@ const Home = ({navigation}) => {
             .catch(err => console.log(err))
     }
 
+    // const listarCaronaById = (id) => {
+    //     fetch(`${endpoint}/${id}`, {
+    //         method: "GET",
+    //         headers: { "Content-type": "application/json; charset=UTF-8" }
+    //     })
+    //         .then(response => console.log(response))
+    //         .catch(err => console.log(err))
+    // }
+
+    const deletarCaronaById = (id) => {
+        fetch(`${endpoint}/${id}`, {
+            method: "DELETE",
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+        })
+            .then(response => response.json())
+            .then(json => console.log(json))
+            .catch(err => console.log(err))
+
+        Alert.alert('carona excluída!');
+
+        listarCaronaAll();
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
                 <Text style={styles.welcomeTitle}>Olá usuário!</Text>
             </View>
+
             <ImageBackground source={require('../assets/images/logo.png')} style={styles.ridesList} imageStyle={styles.image}>
-                <ScrollView style={styles.scroll} contentContainerStyle={{paddingBottom: 150}}>
+                <ScrollView style={styles.scroll} contentContainerStyle={{ paddingBottom: 150 }}>
                     <Text style={styles.openRidesTitle}>Caronas abertas</Text>
+
                     {lista.map(carona => (
-                        <TouchableHighlight style={styles.ride} underlayColor="#674461" onPress={() => {}} key={carona.id}>
-                            <View>
-                                <Text style={styles.rideInfo}>Horário: {carona.horario}</Text>
+                        <TouchableHighlight style={styles.ride} underlayColor="#674461" onPress={() => { }} key={carona.id}>
+                            <View >
+                                <View style={styles.rideHeader}>
+                                    <Text style={styles.rideInfo}>Horário: {carona.horario}</Text>
+
+                                    <View style={styles.buttons}>
+                                        <TouchableOpacity onPressIn={() => { deletarCaronaById(carona.id) }}>
+                                            <Image source={require('../assets/images/lapis.png')} style={styles.pencil}></Image>
+                                        </TouchableOpacity>
+
+                                        <TouchableOpacity onPressIn={() => { deletarCaronaById(carona.id) }}>
+                                            <Image source={require('../assets/images/lixo.png')} style={styles.trash}></Image>
+                                        </TouchableOpacity>
+                                    </View>
+
+                                </View>
+
                                 <Text style={styles.rideInfo}>Número de vagas: {carona.vagas}</Text>
                                 <Text style={styles.rideInfo}>Ponto de partida: {carona.enderecoInicial}</Text>
                                 <Text style={styles.rideInfo}>Destino: {carona.enderecoFinal}</Text>
@@ -40,6 +89,7 @@ const Home = ({navigation}) => {
                     ))}
                 </ScrollView>
             </ImageBackground>
+
             <TouchableHighlight style={styles.addRide} underlayColor="#FFF400" onPress={() => {
                 navigation.navigate("CriarCarona");
             }}>
@@ -114,19 +164,41 @@ const styles = StyleSheet.create({
         color: '#FFF',
     },
 
-    addRide:{
+    rideHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+
+    buttons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+
+    pencil: {
+        width: 25,
+        height: 25,
+        marginRight: 8,
+    },
+
+    trash: {
+        width: 25,
+        height: 25,
+        marginLeft: 8,
+    },
+
+    addRide: {
         width: 75,
         height: 75,
-        position:'absolute',
-        alignItems:'center',
-        justifyContent:'center',
-        right:'7%',
-        bottom:'5%',
-        backgroundColor:'#FEDF00',
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: '7%',
+        bottom: '5%',
+        backgroundColor: '#FEDF00',
         borderRadius: 50,
 
     },
-    
+
     addRideIcon: {
         width: 55,
         height: 55,
