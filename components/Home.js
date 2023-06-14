@@ -1,24 +1,43 @@
-import { StyleSheet, View, SafeAreaView, ImageBackground, Text, ScrollView, TouchableHighlight, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, SafeAreaView, ImageBackground, Text, ScrollView, TouchableHighlight, TouchableOpacity, Image, Alert } from 'react-native'
 import React from 'react'
-import { Alert } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Home = ({ navigation }) => {
     const [lista, setaLista] = React.useState([]);
+    const [nomeUsuario, setaNomeUsuario] = React.useState("");
+
 
     const endpoint = 'https://github-sq75eata2q-uc.a.run.app/api/v1/carona';
+    const endpoint_user = 'https://github-sq75eata2q-uc.a.run.app/api/v1/cadastro';
 
     React.useEffect(() => {
-        listarCaronaAll();
-    }, []);
+        const fetchNomeUsuario = async () => {
+            const data = await listarUltimoUsuario();
+            setaNomeUsuario(data.nome);
+        }
+        
+        fetchNomeUsuario();
     
-    // const listarUsuarioById = (id) => {
-    //     fetch(`${'https://github-sq75eata2q-uc.a.run.app/api/v1/usuário'}/${id}`, {
-    //         method: "GET",
-    //         headers: { "Content-type": "application/json; charset=UTF-8" }
-    //     })
-    //         .then(response => console.log(response))
-    //         .catch(err => console.log(err))
-    // }
+    }, []);
+
+    useFocusEffect(
+        React.useCallback(() => {
+               listarCaronaAll();
+        }, [])
+    )
+
+    const listarUltimoUsuario = async () => {
+        try {
+            const response = await fetch(endpoint_user, {
+                method: "GET",
+                headers: { "Content-type": "application/json; charset=UTF-8" }
+            });
+            const data = await response.json();
+            return data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const listarCaronaAll = () => {
         fetch(endpoint, {
@@ -39,24 +58,26 @@ const Home = ({ navigation }) => {
     //         .catch(err => console.log(err))
     // }
 
+    const getCaronaById = (id) => {
+        navigation.navigate('EditarCarona', { id });
+    }
+    
     const deletarCaronaById = (id) => {
         fetch(`${endpoint}/${id}`, {
             method: "DELETE",
             headers: { "Content-type": "application/json; charset=UTF-8" }
         })
             .then(response => response.json())
-            .then(json => console.log(json))
+            .then(json => {console.log(json); listarCaronaAll();})
             .catch(err => console.log(err))
 
-        Alert.alert('carona excluída!');
-
-        listarCaronaAll();
+        Alert.alert('A carona foi excluída.');
     }
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
-                <Text style={styles.welcomeTitle}>Olá usuário!</Text>
+                <Text style={styles.welcomeTitle}>Olá, {nomeUsuario}!</Text>
             </View>
 
             <ImageBackground source={require('../assets/images/logo.png')} style={styles.ridesList} imageStyle={styles.image}>
@@ -64,17 +85,17 @@ const Home = ({ navigation }) => {
                     <Text style={styles.openRidesTitle}>Caronas abertas</Text>
 
                     {lista.map(carona => (
-                        <TouchableHighlight style={styles.ride} underlayColor="#674461" onPress={() => { }} key={carona.id}>
+                        <TouchableHighlight style={styles.ride} underlayColor="#674461" onPress={() => {}} key={carona.id}>
                             <View >
                                 <View style={styles.rideHeader}>
                                     <Text style={styles.rideInfo}>Horário: {carona.horario}</Text>
 
                                     <View style={styles.buttons}>
-                                        <TouchableOpacity onPressIn={() => { deletarCaronaById(carona.id) }}>
+                                        <TouchableOpacity onPress={() => { getCaronaById(carona.id) }}>
                                             <Image source={require('../assets/images/lapis.png')} style={styles.pencil}></Image>
                                         </TouchableOpacity>
 
-                                        <TouchableOpacity onPressIn={() => { deletarCaronaById(carona.id) }}>
+                                        <TouchableOpacity onPress={() => { deletarCaronaById(carona.id) }}>
                                             <Image source={require('../assets/images/lixo.png')} style={styles.trash}></Image>
                                         </TouchableOpacity>
                                     </View>

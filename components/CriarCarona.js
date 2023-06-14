@@ -53,7 +53,7 @@ const CriarCarona = ({ navigation }) => {
       </View>
 
       <ImageBackground source={require('../assets/images/logo.png')} style={styles.rideDetails} imageStyle={styles.image}>
-        <ScrollView style={styles.scroll} contentContainerStyle={{ paddingBottom: 150 }}>
+        <ScrollView style={styles.scroll} contentContainerStyle={{ paddingBottom: 210 }}>
           <Text style={styles.rideDetailsTitle}>Detalhes da carona</Text>
           <View style={styles.mapaWrapper}>
             <MapView
