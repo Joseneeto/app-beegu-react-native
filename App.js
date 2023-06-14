@@ -1,6 +1,7 @@
 import Index from './components/Index';
 import Home from './components/Home';
 import CriarCarona from './components/CriarCarona';
+import EditarCarona from './components/EditarCarona';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -12,6 +13,7 @@ function MyStack() {
       <Stack.Screen name="Index" component={Index} options={{headerShown: false}}/>
       <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
       <Stack.Screen name="CriarCarona" component={CriarCarona} options={{headerShown: false}}/>
+      <Stack.Screen name="EditarCarona" component={EditarCarona} options={{headerShown: false}}/>
     </Stack.Navigator>
   );
 }
