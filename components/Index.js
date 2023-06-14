@@ -1,28 +1,18 @@
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, ImageBackground, Alert } from 'react-native'
-import React, { useCallback } from 'react'
-import * as Font from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-
-SplashScreen.preventAutoHideAsync();
+import React from 'react'
+import { useFonts, BalooBhai2_700Bold } from '@expo-google-fonts/baloo-bhai-2';
 
 const Index = ({ navigation }) => {
-    const [fontsLoaded] = useFonts({
-        'BalooBhai2Bold': require('../assets/fonts/BalooBhai2-Bold.ttf'),
-        'BalooBhai2Regular': require('../assets/fonts/BalooBhai2-Regular.ttf'),
-    });
-
     const [nome, setaNome] = React.useState('');
     const [telefone, setaTelefone] = React.useState('');
 
-    const onLayoutRootView = useCallback(async () => {
-        if (fontsLoaded) {
-          await SplashScreen.hideAsync();
-        }
-      }, [fontsLoaded]);
-    
-      if (!fontsLoaded) {
+    const [fontsLoaded] = useFonts({
+        BalooBhai2_700Bold,
+    })
+
+    if (!fontsLoaded) {
         return null;
-      }
+    }
 
     const endpoint = 'https://github-sq75eata2q-uc.a.run.app/api/v1/cadastro';
 
@@ -60,9 +50,7 @@ const Index = ({ navigation }) => {
     return (
         <View style={styles.containerYellow}>
             <ImageBackground source={require('../assets/images/logo.png')} imageStyle={styles.image}>
-                <View onLayout={onLayoutRootView}>
-                    <Text style={styles.titulo}>Beegu</Text>
-                </View>
+                <Text style={styles.titulo}>Beegu</Text>
 
                 <Text style={styles.label}>Nome</Text>
                 <TextInput style={styles.caixaTexto} value={nome} onChangeText={setaNome} />
@@ -101,7 +89,7 @@ const styles = StyleSheet.create({
         color: '#4C2F47',
         fontSize: 64,
         fontWeight: 'bold',
-        fontFamily: 'BalooBhai2Bold',
+        fontFamily: 'BalooBhai2_700Bold',
         marginBottom: 80,
     },
 

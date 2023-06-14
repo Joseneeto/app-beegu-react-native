@@ -86,12 +86,12 @@ const CriarCarona = ({ navigation }) => {
           <TextInput style={styles.caixaTexto} value={enderecoFinal} onChangeText={setaEnderecoFinal} />
 
           <View style={styles.opcoes}>
-            <View>
+            <View style={styles.horario}>
               <Text style={styles.label}>Horário da partida</Text>
               <TextInput style={styles.caixaTexto} value={horario} onChangeText={setaHorario} />
             </View>
 
-            <View>
+            <View style={styles.lugares}>
               <Text style={styles.label}>Número de lugares</Text>
               <TextInput style={styles.caixaTexto} value={vagas} onChangeText={setaVagas} keyboardType='numeric' />
             </View>
@@ -201,7 +201,18 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 
+  horario: {
+    marginRight: 10,
+    paddingRight: 10,
+  },
+
+  lugares:{
+    marginLeft: 10,
+    paddingLeft: 10,
+  },
+
   botao: {
+    height: 48,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#4C2F47',

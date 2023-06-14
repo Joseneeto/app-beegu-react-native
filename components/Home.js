@@ -168,9 +168,9 @@ const styles = StyleSheet.create({
     scroll: {
         width: '100%',
         paddingTop: 30,
-        paddingRight: 45,
+        paddingRight: 40,
         paddingBottom: 30,
-        paddingLeft: 45,
+        paddingLeft: 40,
     },
 
     ride: {
